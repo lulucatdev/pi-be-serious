@@ -1,0 +1,12 @@
+{
+  "name": "pi-be-serious",
+  "version": "0.1.0",
+  "description": "System prompt injection that enforces formal, textbook-grade written register across all LLM output.",
+  "license": "MIT",
+  "type": "module",
+  "keywords": ["pi-package", "pi", "writing-style", "formal", "system-prompt"],
+  "pi": {
+    "prompts": ["./prompts"],
+    "skills": ["./skills"]
+  }
+}
