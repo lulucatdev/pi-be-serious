@@ -1,11 +1,10 @@
 ---
 name: be-serious
 description: |
-  Enforce formal, textbook-grade written register across all agent output.
-  Auto-triggers on any task to override colloquial tendencies in model output.
-  Targets: slang, filler words, sycophantic phrases, marketing adjectives,
-  forced informality, emoji, exclamation marks used for enthusiasm, and all
-  other deviations from plain expository prose.
+  Manual secondary interface for enforcing formal, textbook-grade written
+  register across agent output. Use when the user explicitly invokes
+  `/skill:be-serious` to load or restate the register policy.
+disable-model-invocation: true
 ---
 
 # Register constraint: formal written prose

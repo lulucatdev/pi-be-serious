@@ -3,10 +3,25 @@
   "version": "0.1.0",
   "description": "System prompt injection that enforces formal, textbook-grade written register across all LLM output.",
   "license": "MIT",
+  "scripts": {
+    "smoke": "bash ./scripts/smoke-test.sh"
+  },
+  "files": [
+    "extensions",
+    "prompts",
+    "skills",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
   "type": "module",
   "keywords": ["pi-package", "pi", "writing-style", "formal", "system-prompt"],
   "pi": {
+    "extensions": ["./extensions/be-serious/index.ts"],
     "prompts": ["./prompts"],
     "skills": ["./skills"]
+  },
+  "peerDependencies": {
+    "@mariozechner/pi-coding-agent": "*"
   }
 }

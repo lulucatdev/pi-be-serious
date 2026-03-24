@@ -1,6 +1,8 @@
 # pi-be-serious
 
-A [pi](https://github.com/mariozechner/pi) package that injects a formal writing-register constraint into the system prompt. Designed to suppress the colloquial, slang-heavy, and sycophantic output tendencies exhibited by certain foundation models (notably the OpenAI Codex series and similar instruction-tuned models).
+A [pi](https://github.com/mariozechner/pi) package that enforces a formal writing-register constraint across agent output. It is designed to suppress colloquial, slang-heavy, and sycophantic output tendencies exhibited by certain instruction-tuned foundation models.
+
+The package now uses a pi extension as its primary enforcement layer. On every agent run, the extension appends the register constraint to the active system prompt. The package also keeps an explicit prompt template and skill for users who want to invoke the same constraint manually.
 
 The constraint directs the model to produce plain, precise, expository prose at the register of a university textbook. All slang, filler, enthusiasm markers, emoji, marketing adjectives, and forced informality are prohibited.
 
@@ -12,23 +14,30 @@ pi install git:github.com/lulucatdev/pi-be-serious
 
 ## Usage
 
+### Automatic enforcement (default)
+
+After installing the package, pi loads the bundled extension automatically. The extension injects the register constraint into the system prompt on every agent run, so the behavior does not depend on skill auto-triggering.
+
 ### Prompt (explicit, per-turn injection)
 
 ```text
 /prompt:be-serious <your request here>
 ```
 
-This wraps the request with the full register constraint and passes it to the model as a single turn.
+This wraps the request with the register constraint for that invocation. It is useful when the user wants an explicit per-turn entry point, even though the extension already applies the policy automatically.
 
-### Skill (auto-triggering)
-
-The `be-serious` skill auto-triggers based on description matching. When the model detects that formal output is appropriate (which should be always, given the broad description), it loads the skill and applies the constraint.
-
-To invoke explicitly:
+### Skill (explicit manual secondary interface)
 
 ```text
 /skill:be-serious
 ```
+
+The `be-serious` skill remains available as an explicit manual secondary interface. It exposes the same constraint text for manual loading with `/skill:be-serious` and keeps the package compatible with skill-based workflows. However, the extension is the primary mechanism that guarantees the policy is present.
+
+## Implementation notes
+
+- The extension reads the canonical constraint text from `skills/be-serious/SKILL.md`, prepends a short enforcement preamble, and appends the combined policy to the active system prompt in `before_agent_start`.
+- The prompt template and skill remain in the package as explicit user-facing entry points.
 
 ## What it prohibits
 
