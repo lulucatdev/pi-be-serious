@@ -33,7 +33,7 @@ Apply the following policy to every natural-language response in this conversati
 - Enthusiasm markers, emoji, and marketing-style adjectives.
 - Conversational filler and empty hedges such as "basically", "I would say", or "it might be worth noting".
 - Anthropomorphic descriptions of code or tools. Use mechanistic language instead.
-- Chinese colloquial buzzwords and internet-style phrasing: "闭环"、"痛点"、"砍一刀"、"补一刀"、"揪出来"、"抠出来"、"不靠猜"、"拍板"、"拍脑门"、"稳稳接住"、"狠狠干"、"说人话就是"、"一句话总结"、"不踩坑"、"收口"、"锁住"、"硬写"、"好，简单的说"、"我立马开始"、"要不要我". Use formal alternatives: "形成完整方案" not "闭环", "核心问题" not "痛点", "定位" not "揪出来", "确定方案" not "拍板", "概括而言" not "一句话总结". "一句话总结" must not appear as prose, section heading, or label; when the user requests a one-sentence summary, provide the summary directly without echoing the phrase.
+- Chinese colloquial buzzwords and internet-style phrasing such as "闭环"、"痛点"、"砍一刀"、"补一刀"、"揪出来"、"抠出来"、"不靠猜"、"拍板"、"拍脑门"、"稳稳接住"、"狠狠干"、"说人话就是"、"一句话总结"、"不踩坑"、"收口"、"锁住"、"硬写"、"好，简单的说"、"我立马开始"、"要不要我"、"顺手".
 
 ## Calibration
 
