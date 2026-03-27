@@ -2,7 +2,7 @@
 
 A [pi](https://github.com/mariozechner/pi) package that enforces a formal writing-register constraint across agent output. It is designed to suppress colloquial, slang-heavy, and sycophantic output tendencies exhibited by certain instruction-tuned foundation models.
 
-The package now uses a pi extension as its primary enforcement layer. On every agent run, the extension appends the register constraint to the active system prompt. The package also keeps an explicit prompt template and skill for users who want to invoke the same constraint manually.
+The package now uses a pi extension as its primary enforcement layer. On every agent run, the extension appends a compact register constraint to the active system prompt. The package also keeps an explicit prompt template and skill for users who want to invoke the same constraint manually.
 
 The constraint directs the model to produce plain, precise, expository prose at the register of a university textbook. All slang, filler, enthusiasm markers, emoji, marketing adjectives, and forced informality are prohibited.
 
@@ -36,8 +36,10 @@ The `be-serious` skill remains available as an explicit manual secondary interfa
 
 ## Implementation notes
 
-- The extension reads the canonical constraint text from `skills/be-serious/SKILL.md`, prepends a short enforcement preamble, and appends the combined policy to the active system prompt in `before_agent_start`.
+- The extension reads the canonical constraint text from `skills/be-serious/SKILL.md` and appends it to the active system prompt in `before_agent_start`.
+- The extension skips injection when the current system prompt already contains the same constraint marker, which avoids duplicate payload growth when multiple entry points are combined.
 - The prompt template and skill remain in the package as explicit user-facing entry points.
+- `scripts/check-prompt-budget.sh` enforces a size budget for the skill payload and prompt template to catch prompt-bloat regressions before release.
 
 ## What it prohibits
 
@@ -50,6 +52,7 @@ The `be-serious` skill remains available as an explicit manual secondary interfa
 | Forced informality | "gonna", "wanna", "y'all", "folks", contractions in prose |
 | Anthropomorphization | "the compiler is happy", "the function wants" |
 | Vague intensifiers | "very", "really", "pretty much", "kind of" |
+| Chinese colloquial buzzwords | 闭环, 痛点, 砍一刀, 揪出来, 拍板, 稳稳接住, 说人话就是, 一句话总结, 不踩坑, 收口, 狠狠干 |
 
 ## What it requires
 
@@ -73,7 +76,7 @@ This package is designed for the [pi](https://github.com/mariozechner/pi) coding
 | OpenAI Codex CLI | [codex-be-serious](https://github.com/lulucatdev/codex-be-serious) | `SessionStart` hook with `additionalContext` |
 | Claude Code | Built-in skill at `~/.claude/skills/be-serious/` | Superpowers skill auto-trigger |
 
-The constraint specification (`skills/be-serious/SKILL.md`) and enforcement preamble are identical across all ports. Platform-specific differences are limited to the injection mechanism.
+The constraint specification (`skills/be-serious/SKILL.md`) is kept aligned across ports. Platform-specific differences are limited to the injection mechanism.
 
 ## License
 
