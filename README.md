@@ -63,6 +63,18 @@ The `be-serious` skill remains available as an explicit manual secondary interfa
 
 The constraint applies to all natural-language output. It does not apply to generated code, where idiomatic conventions of the target language take precedence.
 
+## Other platforms
+
+This package is designed for the [pi](https://github.com/mariozechner/pi) coding agent. Ports to other agent platforms are available:
+
+| Platform | Repository | Enforcement mechanism |
+|----------|------------|----------------------|
+| pi | this repository | `before_agent_start` extension hook |
+| OpenAI Codex CLI | [codex-be-serious](https://github.com/lulucatdev/codex-be-serious) | `SessionStart` hook with `additionalContext` |
+| Claude Code | Built-in skill at `~/.claude/skills/be-serious/` | Superpowers skill auto-trigger |
+
+The constraint specification (`skills/be-serious/SKILL.md`) and enforcement preamble are identical across all ports. Platform-specific differences are limited to the injection mechanism.
+
 ## License
 
 MIT
