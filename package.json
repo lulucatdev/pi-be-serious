@@ -4,7 +4,9 @@
   "description": "System prompt injection that enforces formal, textbook-grade written register across all LLM output.",
   "license": "MIT",
   "scripts": {
-    "smoke": "bash ./scripts/smoke-test.sh"
+    "check:prompt-budget": "bash ./scripts/check-prompt-budget.sh",
+    "smoke": "bash ./scripts/smoke-test.sh",
+    "test": "npm run check:prompt-budget"
   },
   "files": [
     "extensions",
